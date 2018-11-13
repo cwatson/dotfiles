@@ -1,0 +1,2 @@
+initialZoom page
+urlCommand "/usr/bin/firefox -remote 'openURL(%s)'"

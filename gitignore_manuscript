@@ -1,0 +1,28 @@
+## Core auxiliary files
+*.aux
+*.log
+*.out
+*.toc
+
+## Bibliography auxiliary files
+*.bbl
+*.blg
+
+## minted/listings
+*.listing
+_minted*
+
+## Other
+*.docx
+*.pptx
+*.xlsx
+*.ptc
+*-concordance.tex
+cache/
+rand/
+*.swp
+*.rda
+*.png
+
+# Comment the following line to keep figures
+figure/*.pdf
