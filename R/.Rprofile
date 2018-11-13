@@ -4,11 +4,12 @@
   options(repos=c(CRAN='http://cran.us.r-project.org/'),
           width=100,
           datatable.print.nrows=50,
+          vimcom.verbose=1,
           useFancyQuotes='TeX')
-  Sys.setenv(R_PDFVIEWER='')
+  Sys.setenv(R_PDFVIEWER='/usr/bin/xpdf')
 
   library(pacman)
-  p_load(setwidth, plyr, data.table, ggplot2, gridExtra)
+  p_load(setwidth, vimcom, plyr, data.table, ggplot2, gridExtra)
   cat("\nSuccessfully loaded .Rprofile at", date(), "\n")
 }
 

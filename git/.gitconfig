@@ -1,8 +1,9 @@
 [user]
     name = Chris Watson
-    email = 
+    email = Christopher.Watson@childrens.harvard.edu
 [core]
     editor = vim
+    excludesfile = /home/cwatson/.gitignore
 [merge]
     tool = vimdiff
 [diff]
