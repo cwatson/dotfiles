@@ -5,7 +5,7 @@
           width=100,
           datatable.print.nrows=50,
           useFancyQuotes='TeX')
-  Sys.setenv(R_PDFVIEWER='')
+  Sys.setenv(R_PDFVIEWER='/usr/bin/zathura')
 
   library(pacman)
   p_load(setwidth, plyr, data.table, ggplot2, gridExtra)

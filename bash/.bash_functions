@@ -26,6 +26,10 @@ grepnc() {
     grep ${1} ${@:2} | grep -v ':.*#'
 }
 
+pdfcut() {
+    qpdf --pages $1 $2 -- $1 o.pdf
+}
+
 ff() {
     find . -type f -iname '*'$*'*' | grep --color=never -i "$*"
 }
@@ -50,7 +54,15 @@ ffwc() {
     ff $* | wc -l
 }
 
+ffzath() {
+    ff $* | xargs zathura
+}
+
 # Disk usage, sorted in human-readable from high to low
 dusort() {
     du -sh $* | sort -hr
+}
+
+mp3info() {
+    ffprobe ${1} 2>&1 | grep -A90 'Metadata:'
 }
