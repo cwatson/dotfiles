@@ -1,5 +1,9 @@
 # .bash_functions
 
+function fpdf() {    # Find and open a PDF; best used after "ff" to narrow down results
+    find . -type f -iname '*'$*'*'.pdf -exec xpdf {} \;
+}
+
 git_branch () {
     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'
 }
@@ -54,3 +58,8 @@ ffwc() {
 dusort() {
     du -sh $* | sort -hr
 }
+
+function lsm() {
+    ls *.{mp4,avi,wmv,mpg,mpeg,divx}
+}
+

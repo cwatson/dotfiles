@@ -27,7 +27,13 @@ alias cats='highlight -O ansi --force'
 alias winepdf='wine /home/cwatson/.wine/drive_c/Program\ Files/Tracker\ Software/PDF\ Viewer/PDFXCview.exe'
 alias windjview='wine /home/cwatson/.wine/drive_c/Program\ Files\ \(x86\)/WinDjView/WinDjView.exe'
 alias matlab='matlab -nosplash -nodesktop'
-alias lof=
+alias lof='libreoffice5.0 --nologo'
+alias mplayer='mplayer -zoom -stop-xscreensaver'
+alias mplayerISO='mplayer dvd://1 -dvd-device'
+alias mp3='cd /media/disk-1; /usr/java/jre1.6.0_17/bin/java -jar NW*' #for Sinead's Sony MP3 player
+alias tux='cd /usr/local/tuxguitar/current; ./tuxguitar; cd -'
+alias azureus='cd /usr/local/vuze; ./azureus &'
+alias vuze='azureus'
 
 set -o vi
 
@@ -47,3 +53,40 @@ HISTSIZE=10000
 HISTFILESIZE=10000
 
 umask 002
+
+# Lines added by the Vim-R-plugin command :RpluginConfig (2015-Jul-06 13:10):
+# Change the TERM environment variable (to get 256 colors) and make Vim
+# connecting to X Server even if running in a terminal emulator (to get
+# dynamic update of syntax highlight and Object Browser):
+if [ "x$DISPLAY" != "x" ]; then
+    export HAS_256_COLORS=yes
+    alias tmux="tmux -2"
+    if [ "$TERM" = "xterm" ]; then
+        export TERM=xterm-256color
+    fi
+    alias vim="vim --servername VIM"
+    if [ "$TERM" == "xterm" ] || [ "$TERM" == "xterm-256color" ]; then
+        tvim() {
+            tmux -2 new-session "TERM=screen-256color vim --servername VIM $@" ;
+        }
+    else
+        tvim() {
+            tmux new-session "vim --servername VIM $@" ;
+        }
+    fi
+else
+    if [ "$TERM" == "xterm" ] || [ "$TERM" == "xterm-256color" ]; then
+        export HAS_256_COLORS=yes
+        alias tmux="tmux -2"
+        tvim() {
+            tmux -2 new-session "TERM=screen-256color vim $@" ;
+        }
+    else
+        tvim() {
+            tmux new-session "vim $@" ;
+        }
+    fi
+fi
+if [ "$TERM" = "screen" ] && [ "$HAS_256_COLORS" = "yes" ]; then
+    export TERM=screen-256color
+fi
