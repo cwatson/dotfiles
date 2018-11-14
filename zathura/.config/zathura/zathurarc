@@ -1,0 +1,14 @@
+# zathurarc
+
+# settings
+set window-height 1200
+set window-width 1600
+set adjust-open best-fit
+set window-title-basename true
+set window-icon /usr/share/icons/mate/32x32/mimetypes/application-pdf.png
+
+# Invert colors
+set recolor true
+set recolor-darkcolor "#BDE090"
+set recolor-lightcolor "#1F1F1F"
+set recolor-keephue true

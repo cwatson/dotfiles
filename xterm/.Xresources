@@ -1,4 +1,4 @@
 XTerm*background: black
 XTerm*foreground: white
 XTerm*scrollBar: true
-XTerm.VT100.geometry: 100x40
+XTerm.VT100.geometry: 200x76

@@ -1,6 +1,11 @@
 " .vimrc
 " Maintained by Christopher G. Watson <cwa135@alum.mit.edu>
 "
+" For version:
+"   VIM - Vi IMproved 8.0 (2016 Sep 12, compiled Sep 15 2016 14:28:53)
+"   Included patches: 1-5
+"   Huge version with GTK2 GUI.
+"
 
 " General settings {{{
 set nocompatible
@@ -55,6 +60,7 @@ inoremap <ESC> <nop>
 nnoremap <C-c> :bp\|bd #<CR>
 nnoremap <C-n> :bnext<CR>
 nnoremap <C-p> :bprev<CR>
+nnoremap gO :!zathura <cfile> &<CR>
 nnoremap <Leader><space> :nohlsearch<CR>
 " Press <tab> to match pairs
 nnoremap <tab> %
@@ -110,7 +116,7 @@ Plugin 'MarcWeber/vim-addon-mw-utils'
 Plugin 'tomtom/tlib_vim'
 Plugin 'garbas/vim-snipmate'
 Plugin 'honza/vim-snippets'
-
+packadd! matchit
 Plugin 'wellle/tmux-complete.vim'
 "}}}
 
@@ -171,7 +177,7 @@ let g:rrst_syn_hl_chunk = 1
 let R_synctex = 0
 let g:R_openpdf = 1
 let g:R_latexcmd = ['pdflatex', '-shell-escape']
-let g:R_pdfviewer = ''
+let g:R_pdfviewer = 'zathura'
 let g:R_texerror = 1
 
 let g:R_objbr_opendf = 1
@@ -192,17 +198,17 @@ nnoremap <silent> <C-j> :ALENextWrap<CR>
 "---------------------------------------
 let g:tex_flavor = 'latex'
 let g:Tex_DefaultTargetFormat = 'pdf'
-let g:Tex_ViewRule_pdf = ''
+let g:Tex_ViewRule_pdf = 'zathura'
 let g:Tex_MultipleCompileFormats='pdf'
 let g:Tex_SmartKeyDot=0
 
-let g:livepreview_previewer = ''
+let g:livepreview_previewer = 'zathura'
 nmap <Leader>j <Plug>IMAP_JumpForward
 "}}}
 
 " vim-orgmode {{{
 "---------------------------------------
-let g:org_agenda_files = ['/home/cwatson/Dropbox/packages/brainGraph.other/brainGraph.org', '/home/cwatson/Dropbox/packages/brainGraph.UserGuide/todos_userGuide.org', '/home/cwatson/Dropbox/Work/grants/grants.org', '/home/cwatson/Dropbox/TODO.org', '/home/cwatson/Dropbox/Work/BCH/bch.org']
+let g:org_agenda_files = ['/home/cwatson/Desktop/TBI/stress_study/docs/grants/notes_grants.org', '/home/cwatson/Desktop/TBI/stress_study/docs/notes_meetings.org', '/home/cwatson/Desktop/TBI/stress_study/docs/todos_TBI.org', '/home/cwatson/Desktop/TBI/stress_study/docs/pubs/manuscripts/watson2018a_TBI_tractography_initial/todos_dti_manuscript.org', '/home/cwatson/Dropbox/packages/brainGraph.other/brainGraph.org', '/home/cwatson/Dropbox/packages/brainGraph.UserGuide/todos_userGuide.org', '/home/cwatson/Dropbox/Work/grants/grants.org', '/home/cwatson/Dropbox/TODO.org', '/home/cwatson/Desktop/journal/papers_to_read.org', '/home/cwatson/Dropbox/Work/BCH/bch.org']
 let g:org_todo_keywords = ['TODO', 'STARTED', '|', 'DONE', 'CANCELED']
 let g:org_todo_keyword_faces = [['TODO', [':foreground red', ':background black', ':weight bold']], ['STARTED', [':foreground white', ':background blue', ':weight bold']], ['DONE', [':foreground green', ':background black', ':weight bold']], ['CANCELED', [':foreground green', ':background black', ':weight bold']]]
 let g:org_indent = 1
