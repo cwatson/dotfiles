@@ -102,14 +102,18 @@ Plugin 'chrisbra/Colorizer'
 "---------------------------------------
 Plugin 'jcf/vim-latex'
 Plugin 'xuhdev/vim-latex-live-preview'
-Plugin 'jalvesaq/Nvim-R'
+"Plugin 'jalvesaq/Nvim-R'
+Plugin 'vim-scripts/Vim-R-plugin'
 Plugin 'w0rp/ale'                           "Asynchronous Lint Engine
 " Snippets, utilties, movement
 Plugin 'MarcWeber/vim-addon-mw-utils'
 Plugin 'tomtom/tlib_vim'
 Plugin 'garbas/vim-snipmate'
 Plugin 'honza/vim-snippets'
-
+Plugin 'geoffharcourt/vim-matchit'
+Plugin 'chrisbra/NrrwRgn'
+Plugin 'itchyny/calendar.vim'
+Plugin 'inkarkat/vim-SyntaxRange'
 Plugin 'wellle/tmux-complete.vim'
 "}}}
 
@@ -147,37 +151,55 @@ let g:csv_comment = '#'
 
 " Nvim-R settings {{{
 "---------------------------------------
-let g:R_setwidth = 0
-let g:R_start_libs = 'base,graphics,grDevices,methods,parallel,stats,utils,brainGraph,cairoDevice,data.table,foreach,ggplot2,gridExtra,Hmisc,igraph,MASS,Matrix,mediation,oro.nifti,permute,RcppEigen,RGtk2'
-let g:R_in_buffer = 1
-let g:R_tmux_split = 1
-let g:R_rconsole_width = 0
-let g:R_rconsole_height = 36
+"let g:R_setwidth = 0
+"let g:R_start_libs = 'base,graphics,grDevices,methods,parallel,stats,utils,brainGraph,cairoDevice,data.table,foreach,ggplot2,gridExtra,Hmisc,igraph,MASS,Matrix,mediation,oro.nifti,permute,RcppEigen,RGtk2'
+"let g:R_in_buffer = 1
+"let g:R_tmux_split = 1
+"let g:R_rconsole_width = 0
+"let g:R_rconsole_height = 36
+let g:vimrplugin_start_libs = 'base,stats,graphics,grDevices,utils,methods,igraph,brainGraph,ggplot2'
+let g:ScreenImpl = 'Tmux'
+let g:vimrplugin_vsplit = 'shell'
+let g:ScreenShellInitialFocus = 'shell'
 " instruct to use your own .screenrc file
 "let g:R_noscreenrc = 1
 " For integration of r-plugin with screen.vim
 "let g:R_screenplugin = 1
 
 " see R documentation in a Vim buffer
-let g:R_nvimpager = 'tab'
+let vimrplugin_vimpager = 'vertical'
+"let g:R_nvimpager = 'tab'
 
-let g:R_underscore = 0
-let g:R_assign = 0
-let g:R_rnowebchunk = 0
-let g:R_insert_mode_cmds = 0
+let g:vimrplugin_underscore = 0
+let g:vimrplugin_assign = 0
+let g:vimrplugin_rnowebchunk = 0
+let g:vimrplugin_insert_mode_cmds = 0
 let g:rrst_syn_hl_chunk = 1
 
-let R_synctex = 0
-let g:R_openpdf = 1
-let g:R_latexcmd = ['pdflatex', '-shell-escape']
-let g:R_pdfviewer = ''
-let g:R_texerror = 1
-
-let g:R_objbr_opendf = 1
-let g:R_objbr_allnames = 0
-let g:R_objbr_place = 'script,right'
+let vimrplugin_synctex = 0
+let g:vimrplugin_openpdf = 1
+let g:vimrplugin_latexcmd = 'pdflatex'
+let g:rplugin_pdfviewer = 'xpdf'
 
 let g:rplugin_vimcomport = 1
+let r_syntax_folding = 1
+"let g:R_underscore = 0
+"let g:R_assign = 0
+"let g:R_rnowebchunk = 0
+"let g:R_insert_mode_cmds = 0
+"let g:rrst_syn_hl_chunk = 1
+"
+"let R_synctex = 0
+"let g:R_openpdf = 1
+"let g:R_latexcmd = ['pdflatex', '-shell-escape']
+"let g:R_pdfviewer = ''
+"let g:R_texerror = 1
+"
+"let g:R_objbr_opendf = 1
+"let g:R_objbr_allnames = 0
+"let g:R_objbr_place = 'script,right'
+"
+"let g:rplugin_vimcomport = 1
 "}}}
 
 " ale/lintr defaults {{{
@@ -191,7 +213,7 @@ nnoremap <silent> <C-j> :ALENextWrap<CR>
 "---------------------------------------
 let g:tex_flavor = 'latex'
 let g:Tex_DefaultTargetFormat = 'pdf'
-let g:Tex_ViewRule_pdf = ''
+let g:Tex_ViewRule_pdf = 'xpdf'
 let g:Tex_MultipleCompileFormats='pdf'
 let g:Tex_SmartKeyDot=0
 
@@ -281,6 +303,9 @@ let g:airline#extensions#bufferline#enabled = 1
 let g:airline#extensions#branch#enabled = 1
 "}}}
 "}}}
+
+" tagbar
+nmap <F8> :TagbarToggle<CR>
 
 " Only do this part when compiled with support for autocommands. {{{
 if has("autocmd")
