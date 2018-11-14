@@ -202,6 +202,7 @@ let g:Tex_MultipleCompileFormats='pdf'
 let g:Tex_SmartKeyDot=0
 
 let g:livepreview_previewer = 'zathura'
+nmap <Leader>j <Plug>IMAP_JumpForward
 "}}}
 
 " vim-orgmode {{{

@@ -80,7 +80,7 @@ EIGHTBIT 1
 RESET 0 # reset to "normal" color
 DIR 01;34	# directory
 LINK 01;36	# symbolic link (If you set this to 'target' instead of a
-		# numerical value, the color is as for the file pointed to.)
+            # numerical value, the color is as for the file pointed to.)
 MULTIHARDLINK 00	# regular file with more than one link
 FIFO 40;33	# pipe
 SOCK 01;35	# socket
@@ -195,8 +195,8 @@ EXEC 01;32
 .cgm 01;35
 .emf 01;35
 
-.nii 01;35
-.nii.gz 01;35
+.nii 01;04;35
+.nii.gz 01;04;35
 
 # http://wiki.xiph.org/index.php/MIME_Types_and_File_Extensions
 .axv 01;35
@@ -229,7 +229,9 @@ EXEC 01;32
 .Rnw 01;33
 .Rd 01;33
 .Rmd 01;33
-.Rhistory 01;33
+.Rhistory   01;33
+.Rscript    01;33
+.littler    01;33
 .tex 01;33
 .md 01;33
 .mediawiki 01;33
