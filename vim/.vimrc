@@ -312,6 +312,7 @@ if has("autocmd")
   autocmd BufNewFile,BufRead DESCRIPTION set ft=rdesc
   autocmd BufNewFile,BufRead current_message.txt set ft=mail
   autocmd BufNewFile,BufReadPre *pentadactylrc set ft=vim
+  autocmd BufNewFile,BufRead *tmux.conf set ft=tmux
   "}}}
 
   " Remap <Leader> for TeX {{{
