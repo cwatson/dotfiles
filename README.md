@@ -1,4 +1,4 @@
-# cgwatson's dotfiles
+# cwatson's dotfiles
 Repository to hold my dotfiles for various utilities and a few machines I do work on. There are 3 branches besides `master`:
 1. `laptop` is merged into `master` since it is what I use 95% of the time. The system is [`CentOS 7`](https://www.centos.org).
 2. `parietal` is a workstation running `CentOS 6`.
