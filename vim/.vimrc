@@ -35,6 +35,7 @@ set history=50		            " Keep 50 lines of command line history
 set hlsearch                    " Highlight search terms
 set incsearch		            " Do incremental searching
 set smartcase                   " Ignore case if search pattern is all lower
+set gdefault                    " Always search+replace globally
 "}}}
 " Fold settings {{{
 set foldenable
