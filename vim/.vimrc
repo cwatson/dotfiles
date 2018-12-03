@@ -9,22 +9,12 @@
 
 " General settings {{{
 set nocompatible
-
-" Switch syntax highlighting on, when the terminal has colors
-" Also switch on highlighting the last used search pattern.
-if &t_Co > 2 || has("gui_running")
-  syntax on
-  set guifont="Courier 10 Pitch"
-  set guioptions-=T
-endif
-
-colorscheme torte
-set background=dark
 set number                      " Always show line numbers
 set relativenumber              " Show line numbers relative to cursor line
 set ruler		                " Show the cursor position all the time
 set showcmd		                " Display incomplete commands
 set showmatch
+
 "}}}
 
 " Editing behavior {{{
@@ -39,6 +29,7 @@ set backspace=indent,eol,start  " Allow backspacing over everything in insert mo
 set history=50		            " Keep 50 lines of command line history
 set hlsearch                    " Highlight search terms
 set incsearch		            " Do incremental searching
+set ignorecase                  " Ignore case when searching
 set smartcase                   " Ignore case if search pattern is all lower
 set gdefault                    " Always search+replace globally
 "}}}
@@ -47,7 +38,7 @@ set foldenable
 set foldcolumn=2
 au FileType sh let g:sh_fold_enabled=4
 au FileType sh set foldmethod=syntax
-au FileType vim set foldmethod=marker
+au FileType vim,conf set foldmethod=marker
 "}}}
 
 " Key mappings {{{
@@ -70,7 +61,8 @@ nnoremap <Leader>w <C-w>v<C-w>l
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
+" Display the TagBar in a buffer
+nmap <F8> :TagbarToggle<CR>
 "}}}
 
 " Vundle stuff {{{
@@ -95,6 +87,7 @@ Plugin 'junegunn/gv.vim'
 
 " Change/improve visuals {{{
 "---------------------------------------
+Plugin 'flazz/vim-colorschemes'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'luochen1990/rainbow'
@@ -139,6 +132,8 @@ Plugin 'jkramer/vim-checkbox'
 Plugin 'itchyny/calendar.vim'
 Plugin 'tpope/vim-repeat'
 Plugin 'dhruvasagar/vim-table-mode'
+Plugin 'majutsushi/tagbar'
+Plugin 'vim-scripts/SyntaxRange'
 "}}}
 "}}}
 
@@ -146,6 +141,22 @@ Plugin 'dhruvasagar/vim-table-mode'
 call vundle#end()            " required
 filetype plugin indent on    " required
 "-------------------------------------------------------------------------------
+"}}}
+" Colors {{{
+" Switch syntax highlighting on, when the terminal has colors
+" Also switch on highlighting the last used search pattern.
+if &t_Co > 2 || has("gui_running")
+  syntax on
+  set guifont="Courier 10 Pitch"
+  set guioptions-=T
+endif
+
+"TODO work on this stuff
+colorscheme torte
+set background=dark
+highlight Title ctermfg=yellow
+highlight Type ctermfg=green
+highlight Special ctermfg=brown
 "}}}
 " Plugin settings {{{
 "===============================================================================
@@ -208,10 +219,20 @@ nmap <Leader>j <Plug>IMAP_JumpForward
 
 " vim-orgmode {{{
 "---------------------------------------
-let g:org_agenda_files = ['/home/cwatson/Desktop/TBI/stress_study/docs/grants/notes_grants.org', '/home/cwatson/Desktop/TBI/stress_study/docs/notes_meetings.org', '/home/cwatson/Desktop/TBI/stress_study/docs/todos_TBI.org', '/home/cwatson/Desktop/TBI/stress_study/docs/pubs/manuscripts/watson2018a_TBI_tractography_initial/todos_dti_manuscript.org', '/home/cwatson/Dropbox/packages/brainGraph.other/brainGraph.org', '/home/cwatson/Dropbox/packages/brainGraph.UserGuide/todos_userGuide.org', '/home/cwatson/Dropbox/Work/grants/grants.org', '/home/cwatson/Dropbox/TODO.org', '/home/cwatson/Desktop/journal/papers_to_read.org', '/home/cwatson/Dropbox/Work/BCH/bch.org']
-let g:org_todo_keywords = ['TODO', 'STARTED', '|', 'DONE', 'CANCELED']
-let g:org_todo_keyword_faces = [['TODO', [':foreground red', ':background black', ':weight bold']], ['STARTED', [':foreground white', ':background blue', ':weight bold']], ['DONE', [':foreground green', ':background black', ':weight bold']], ['CANCELED', [':foreground green', ':background black', ':weight bold']]]
+let g:org_agenda_files = ['/home/cwatson/Dropbox/notes/bch.org', '/home/cwatson/Dropbox/notes/coding.org', '/home/cwatson/Dropbox/notes/grants.org', '/home/cwatson/Dropbox/notes/manuscripts.org', '/home/cwatson/Dropbox/notes/personal.org', '/home/cwatson/Dropbox/notes/projects.org', '/home/cwatson/Dropbox/notes/reading.org', '/home/cwatson/Dropbox/packages/brainGraph.other/brainGraph.org', '/home/cwatson/Dropbox/packages/brainGraph.UserGuide/todos_userGuide.org']
+let g:org_todo_keywords =
+    \ ['TODO(t)', 'STARTED(s)', 'WAITING(w)', '|',
+    \ 'DONE(d)', 'CANCELED(c)', 'DEFERRED(f)']
+let g:org_todo_keyword_faces =
+    \ [['TODO', [':foreground red', ':background black', ':weight bold']],
+    \ ['STARTED', [':foreground white', ':background blue', ':weight bold']],
+    \ ['WAITING', [':foreground white', ':background blue', ':weight bold']],
+    \ ['DONE', [':foreground green', ':background black', ':weight bold']],
+    \ ['CANCELED', [':foreground green', ':background black', ':weight bold']],
+    \ ['DEFERRED', [':foreground magenta', ':background black', ':weight bold']]]
+let g:org_heading_highlight_colors = ['Comment', 'Statement', 'Identifier', 'Constant', 'Type', 'PreProc', 'Constant', 'Special'] " blue, yellow, cyan, magenta, green, steelblue, magenta, darkorange3
 let g:org_indent = 1
+let g:org_tag_column = 100  "TODO figure out how to calculate dynamically?
 "}}}
 
 " utl; open links {{{
@@ -252,7 +273,7 @@ let g:rainbow_conf = {
 " vim-airline {{{
 "---------------------------------------
 set laststatus=2
-let g:airline_theme = 'ayu_mirage' " 'hybrid' 'cool' 'light' 'molokai' 'base16_brewer'
+let g:airline_theme = 'dark' " 'ayu_mirage' 'hybrid' 'cool' 'light' 'molokai' 'base16_brewer'
 let g:airline_powerline_fonts = 1
 if !exists('g:airline_symbols')
     let g:airline_symbols = {}
@@ -311,39 +332,41 @@ if has("autocmd")
   "}}}
 
   " Set filetypes for certain extensions {{{
-  autocmd BufNewFile,BufRead *.Rscript set ft=r
-  autocmd BufNewFile,BufRead *.littler set ft=r
+  autocmd BufNewFile,BufRead *.Rscript,*.littler set ft=r
   autocmd BufNewFile,BufRead *.Rnw set ft=rnoweb
-  autocmd BufNewFile,BufRead *.cl[os] set ft=tex
-  autocmd BufNewFile,BufRead *.tikz set ft=tex
+  autocmd BufNewFile,BufRead *.cl[os],*.tikz set ft=tex
   autocmd BufNewFile,BufRead *.rsync set ft=rsync
   autocmd BufNewFile,BufRead DESCRIPTION set ft=rdesc
   autocmd BufNewFile,BufRead current_message.txt set ft=mail
   autocmd BufNewFile,BufReadPre *pentadactylrc set ft=vim
   autocmd BufNewFile,BufRead *tmux.conf set ft=tmux
+  autocmd BufNewFile,BufRead *.org_archive set ft=org
   "}}}
 
   " Remap <Leader> for TeX {{{
   autocmd BufNewFile,BufReadPre * let g:mapleader = '\\'
-  autocmd BufNewFile,BufReadPre *.Rnw let g:mapleader = ';'
-  autocmd BufNewFile,BufReadPre *.tex let g:mapleader = ';'
+  autocmd BufNewFile,BufReadPre,BufEnter *.tex,*.Rnw let g:mapleader = ';'
   "}}}
 
-  " For all text files set 'textwidth' to 80 characters.
-  autocmd FileType text setlocal textwidth=80
-  autocmd FileType sh setlocal textwidth=80
-  autocmd FileType tex setlocal textwidth=80
-  autocmd FileType rnoweb setlocal textwidth=80
-  autocmd FileType r setlocal textwidth=80
+  " Text width and tab spacing changes {{{
+  autocmd FileType text,sh,tex,rnoweb,r setlocal textwidth=80
   autocmd FileType org setlocal textwidth=0
 
   " Spacing should be 2 for R- and HTML-related files
-  autocmd FileType r setlocal ts=2 sw=2 sts=2
-  autocmd FileType rnoweb setlocal ts=2 sw=2 sts=2
-  autocmd FileType html setlocal ts=2 sts=2 sw=2
-  autocmd FileType scss setlocal ts=2 sts=2 sw=2
+  autocmd FileType r,rnoweb,html,scss setlocal ts=2 sw=2 sts=2
+  "}}}
 
+  " Settings/mappings for other filetypes {{{
+  "-------------------------------------
   autocmd FileType man set norelativenumber
+
+  " Auto-resize splits when the vim window changes size
+  autocmd VimResized * wincmd =
+
+  " Don't remap <C-l> for 'vmailMessageList'
+  let blacklist = ['vmailMessageList', 'mail']
+  autocmd BufWritePre * if index(blacklist, &ft) < 0 | nnoremap <C-l> <C-w>l
+  "}}}
 
   " When editing a file, always jump to the last known cursor position.
   " Don't do it when the position is invalid or when inside an event handler

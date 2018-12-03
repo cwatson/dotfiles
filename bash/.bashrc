@@ -7,22 +7,24 @@
 # User specific aliases and functions
 alias vi='/usr/local/bin/vim'
 alias vim='vim --servername VIM'
+alias tmux='tmux -2'
 alias ls='ls --color=auto'
 alias ll="ls -l --time-style '+%F %T'"
 alias la="ls -a"
 alias ssh='ssh -Y'
 alias df='df -h'
 alias free='free -m'
-alias grep='grep --color=always'
-alias egrep='egrep --color=always'
+alias grep='grep --color=always --exclude="*.sw[op]"'
+alias egrep='egrep --color=always --exclude="*.sw[op]"'
 alias less='less -R'
 alias mkdir='mkdir -p'
 alias music='sshfs cwatson.ddns.net: /mnt/cwatson'
 alias tree='tree -C'
-alias todos='python ~/Dropbox/bin/python/list_todo.py -d'
 alias import='import +repage'
 alias pdflatex='pdflatex -interaction nonstopmode'
-alias cats='highlight -O ansi --force'
+alias cats='highlight -O xterm256 --force'
+alias vmail='tmux rename-window "mail"; vmail'
+alias agenda='todos -ca'
 
 # Rsync books, journal, classes, Metal, New_Folder, USB
 alias rsyncB='rsync -avh --del --progress ~/Desktop/books/ cwatson.ddns.net:Desktop/books'
@@ -59,7 +61,7 @@ prompt() {
     local GRAY="\[\033[0;37m\]"
     local BLUE="\[\033[01;34m\]"
     local RED="\[\033[01;31m\]"
-    BRANCH=' \033[00;33m\]$(git_branch)\[\033[00m\]'
+    BRANCH=' \[\033[00;33m\]$(git_branch)\[\033[00m\]'
     export PS1="$GRAY[$GREEN\u$CYAN@$BLUE\h $CYAN\W$GRAY$BRANCH]$ "
 }
 prompt
@@ -82,3 +84,7 @@ fi
 if [ "$TERM" = "screen" ] && [ "$HAS_256_COLORS" = "yes" ]; then
     export TERM=screen-256color
 fi
+export HAS_256_COLORS=yes
+
+# Colorize hard links, too
+eval "$(dircolors ~/.dir_colors | sed 's/mh=00/mh=44;37/')"
