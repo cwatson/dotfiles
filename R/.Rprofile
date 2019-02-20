@@ -23,3 +23,6 @@ lss <- function(x, e=.GlobalEnv) ls(envir=e)[grep(x, ls(envir=e))]
 
 # Create an empty named list based on character vector "x"
 emptyList <- function(x) sapply(x, function(y) NULL)
+
+# Don't prompt to save on quit
+q <- function() .Internal(quit(save='no', status=0, runLast=TRUE))

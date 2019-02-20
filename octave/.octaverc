@@ -1,3 +1,3 @@
 ## Begin savepath auto-created section, do not edit
-  addpath ('/usr/local/matlab/R2012a/toolbox/local/BCT/2017_01_15_BCT', '-begin');
+  addpath ('/usr/local/matlab/R2012a/toolbox/local/spm12:/usr/local/matlab/R2012a/toolbox/local/BCT/2017_01_15_BCT', '-begin');
 ## End savepath auto-created section
