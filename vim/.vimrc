@@ -152,6 +152,7 @@ if &t_Co > 2 || has("gui_running")
 endif
 
 "TODO work on this stuff
+autocmd ColorScheme * highlight Pmenu ctermbg=red ctermfg=white
 colorscheme torte
 set background=dark
 highlight Title ctermfg=yellow
@@ -200,7 +201,7 @@ let g:rplugin_vimcomport = 1
 
 " ale/lintr defaults {{{
 "---------------------------------------
-let g:ale_r_lintr_options = "lintr::with_defaults(object_name_linter=NULL, infix_spaces_linter=NULL, single_quotes_linter=NULL, line_length_linter(100), object_usage_linter=NULL)"
+let g:ale_r_lintr_options = "lintr::with_defaults(object_name_linter=NULL, infix_spaces_linter=NULL, single_quotes_linter=NULL, line_length_linter(150), object_usage_linter=NULL)"
 nnoremap <silent> <C-k> :ALEPreviousWrap<CR>
 nnoremap <silent> <C-j> :ALENextWrap<CR>
 "}}}
@@ -221,12 +222,12 @@ nmap <Leader>j <Plug>IMAP_JumpForward
 "---------------------------------------
 let g:org_agenda_files = ['/home/cwatson/Dropbox/notes/bch.org', '/home/cwatson/Dropbox/notes/coding.org', '/home/cwatson/Dropbox/notes/grants.org', '/home/cwatson/Dropbox/notes/manuscripts.org', '/home/cwatson/Dropbox/notes/personal.org', '/home/cwatson/Dropbox/notes/projects.org', '/home/cwatson/Dropbox/notes/reading.org', '/home/cwatson/Dropbox/packages/brainGraph.other/brainGraph.org', '/home/cwatson/Dropbox/packages/brainGraph.UserGuide/todos_userGuide.org']
 let g:org_todo_keywords =
-    \ ['TODO(t)', 'STARTED(s)', 'WAITING(w)', '|',
+    \ ['TODO(t)', 'DOING(s)', 'WAIT(w)', '|',
     \ 'DONE(d)', 'CANCELED(c)', 'DEFERRED(f)']
 let g:org_todo_keyword_faces =
     \ [['TODO', [':foreground red', ':background black', ':weight bold']],
-    \ ['STARTED', [':foreground white', ':background blue', ':weight bold']],
-    \ ['WAITING', [':foreground white', ':background blue', ':weight bold']],
+    \ ['DOING', [':foreground white', ':background blue', ':weight bold']],
+    \ ['WAIT', [':foreground white', ':background blue', ':weight bold']],
     \ ['DONE', [':foreground green', ':background black', ':weight bold']],
     \ ['CANCELED', [':foreground green', ':background black', ':weight bold']],
     \ ['DEFERRED', [':foreground magenta', ':background black', ':weight bold']]]
