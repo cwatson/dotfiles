@@ -49,7 +49,7 @@ alias stampede='tmux rename-session "TACC" && tmux set-option status off && ssh 
 alias stampede2='tmux rename-session "Stampede" && tmux set-option status off && ssh cgwatson@stampede2.tacc.utexas.edu -t tmux -2'
 alias corral='tmux rename-session "Corral" && ssh cgwatson@corral.tacc.utexas.edu'
 alias ranch='tmux rename-session "Ranch" && ssh cgwatson@ranch.tacc.utexas.edu'
-alias lonestar='ssh cgwatson@ls5.tacc.utexas.edu' #'tmux rename-session "Lonestar" && tmux set-option status off && ssh cgwatson@ls5.tacc.utexas.edu -t tmux -2'
+alias lonestar='tmux rename-session "Lonestar" && ssh cgwatson@ls5.tacc.utexas.edu'
 
 set -o vi
 shopt -s direxpand  # Fix variable name expansion on tab complete
@@ -66,8 +66,8 @@ prompt() {
 }
 prompt
 
-HISTSIZE=10000
-HISTFILESIZE=10000
+HISTSIZE=50000
+HISTFILESIZE=50000
 
 umask 002
 
@@ -76,14 +76,15 @@ umask 002
 # dynamic update of syntax highlight and Object Browser):
 # Change the TERM environment variable (to get 256 colors) even if you are
 # accessing your system through ssh and using either Tmux or GNU Screen:
+export TERM=xterm-256color
 if [ "$TERM" = "xterm" ] || [ "$TERM" = "xterm-256color" ]; then
     alias tmux='tmux -2'
-    export TERM=xterm-256color
+#    export TERM=xterm-256color
     export HAS_256_COLORS=yes
 fi
-if [ "$TERM" = "screen" ] && [ "$HAS_256_COLORS" = "yes" ]; then
-    export TERM=screen-256color
-fi
+#if [ "$TERM" = "screen" ] && [ "$HAS_256_COLORS" = "yes" ]; then
+#    export TERM=screen-256color
+#fi
 export HAS_256_COLORS=yes
 
 # Colorize hard links, too

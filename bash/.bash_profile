@@ -1,9 +1,7 @@
 # .bash_profile
 
 # Get the aliases and functions
-if [ -f ~/.bashrc ]; then
-	. ~/.bashrc
-fi
+[[ -f ~/.bashrc ]] && . ~/.bashrc
 
 # User specific environment and startup programs
 
@@ -22,6 +20,7 @@ PATH=$HOME/Dropbox/mri_library/bin:$HOME/Dropbox/dnl_library/bin:$HOME/Dropbox/b
 PATH=$HOME/Dropbox/dnl_library/bin/fsl:${FSLDIR}/bin${PATH:+:${PATH}}
 EDITOR=/usr/local/bin/vim
 tbidir=${HOME}/Desktop/TBI/stress_study
+alias cdt='cd ${tbidir}'
 
 export PATH LD_LIBRARY_PATH FSLDIR EDITOR
 export MANPAGER="/bin/sh -c \"col -b | vim -c 'set ft=man ts=8 nomod nolist nonu noma' -\""

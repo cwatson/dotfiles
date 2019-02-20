@@ -32,7 +32,7 @@ sort_paths() {
 
 # "grep" a string but exclude commented-out lines; works if searching multiple files
 grepnc() {
-    grep ${1} ${@:2} | grep -v ':.*#'
+    grep ${1} ${@:2} | grep -v ':.*#' | grep --color=always ${1}
 }
 
 # Keep only certain page numbers of a PDF {{{
@@ -61,11 +61,18 @@ ffzath() {
     ff $* | xargs zathura
 }
 
+# Org-related {{{
 # Find all "org" files, excluding duplicates (hard links)
 orgfiles() {
     stat -c '%i %n' $(fext ~ org -not -path "*.cache*" -not -path "*.vim*" | sort -r) | \
         awk '!seen[$1]++' | cut -d ' ' -f 2- | sort
 }
+
+# Convert org to html
+org2html() {
+    emacs ${1} --batch -f org-export-as-html --kill
+}
+#}}}
 
 # Find all git repositories excluding those in ".vim"
 repos() {
