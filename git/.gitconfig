@@ -31,9 +31,13 @@
 [color]
     ui = true
 [color "branch"]
-    current = green bold
+    current = green reverse
     local   = yellow bold
-    remote  = red bold
+    remote  = magenta bold
+[color "diff"]
+    meta = yellow bold
+    frag = magenta bold
+    whitespace = white reverse
 [color "status"]
     header  = blue bold
     added   = green bold
