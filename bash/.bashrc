@@ -26,6 +26,9 @@ alias cats='highlight -O xterm256 --force'
 alias vmail='tmux rename-window "mail"; vmail'
 alias agenda='todos -ca'
 
+alias cdt='cd /home/cwatson/Desktop/TBI/stress_study'
+alias cdj='cd /home/cwatson/Desktop/journal'
+
 # Rsync books, journal, classes, Metal, New_Folder, USB
 alias rsyncB='rsync -avh --del --progress ~/Desktop/books/ cwatson.ddns.net:Desktop/books'
 alias rsyncJ='rsync -avh --del --progress cwatson.ddns.net:Desktop/journal/ ~/Desktop/journal'
@@ -38,11 +41,13 @@ alias unisonP='unison -ui text /media/patriot/CHB/cardiac/fontan/data/Fontan/ ss
 alias unisonH='unison -ui text /media/patriot/CHB/cardiac/fontan/data/Fontan/ ssh://cwatson.ddns.net//home/cwatson/Desktop/usb_backup/CHB/cardiac/fontan/data/Fontan'
 
 # Aliases for launching some external applications
+alias R='R --no-save'
 alias winepdf='wine /home/cwatson/.wine/drive_c/Program\ Files/Tracker\ Software/PDF\ Viewer/PDFXCview.exe'
 alias windjview='wine /home/cwatson/.wine/drive_c/Program\ Files\ \(x86\)/WinDjView/WinDjView.exe'
 alias matlab='matlab -nosplash -nodesktop'
-alias lof='libreoffice6.1 --nologo'
+alias lof='libreoffice6.3 --nologo'
 alias jabref='java -jar /home/cwatson/JabRef-3.8.2.jar'
+alias bnv='/usr/local/BrainNetViewer20181219/run_BrainNet.sh /usr/local/matlab/MATLAB_Runtime_2018a/v94/'
 
 # Aliases for connecting to the different TACC servers
 alias stampede='tmux rename-session "TACC" && tmux set-option status off && ssh cgwatson@stampede.tacc.utexas.edu -t tmux'
@@ -52,7 +57,8 @@ alias ranch='tmux rename-session "Ranch" && ssh cgwatson@ranch.tacc.utexas.edu'
 alias lonestar='tmux rename-session "Lonestar" && ssh cgwatson@ls5.tacc.utexas.edu'
 
 set -o vi
-shopt -s direxpand  # Fix variable name expansion on tab complete
+shopt -s direxpand      # Fix variable name expansion on tab complete
+shopt -s cdable_vars    # Don't insert a space when tab-completing variables
 
 prompt() {
     local WHITE="\[\033[1;37m\]"

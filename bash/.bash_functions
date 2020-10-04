@@ -1,10 +1,16 @@
 # .bash_functions
 
+# Shortcut to print org-agenda
+# The ugly hack w/ "pushd" is to keep the original $OLDPWD
 todos() {
     clear
-    cd /home/cwatson/Dropbox/orgpyvim
+    pushd ${OLDPWD} > /dev/null 2>&1
+    pushd ${OLDPWD} > /dev/null 2>&1
+    pushd /home/cwatson/Dropbox/orgpyvim > /dev/null 2>&1
     python -m orgpyvim "$@"
-    cd - > /dev/null
+    popd > /dev/null 2>&1
+    popd > /dev/null 2>&1
+    popd > /dev/null 2>&1
 }
 
 git_branch() {
@@ -12,7 +18,7 @@ git_branch() {
 }
 
 my_ip() {
-    dig +short myip.opendns.com @resolver1.opendns.com
+    dig @resolver1.opendns.com ANY myip.opendns.com +short -4
 }
 
 # Improve the printing of ${PATH} variables {{{
@@ -35,9 +41,13 @@ grepnc() {
     grep ${1} ${@:2} | grep -v ':.*#' | grep --color=always ${1}
 }
 
-# Keep only certain page numbers of a PDF {{{
+# Merge and subset PDF files {{{
 pdfcut() {
     qpdf --pages $1 $2 -- $1 o.pdf
+}
+
+pdfmerge() {
+    qpdf --empty --pages $1 $2 -- o.pdf
 }
 #}}}
 # "find"-related shortcuts {{{
@@ -52,6 +62,16 @@ fl() {
 fdir() {
     find . -type d -iname '*'$*'*'
 }
+
+# Find files with a specific extension
+#
+# $1    - the path to search
+# $2    - the extension
+# $3-$n - other arguments to `find`
+#
+# Examples
+#
+#    fext /home/cwatson org -not -path "*.cache*"
 
 fext() {
     find ${1} -type f -name '*\.'${2} ${@:3}
@@ -90,15 +110,18 @@ ffwc() {
 #}}}
 # System-related {{{
 psgrep() {
-    ps -fp $(pgrep -f $*)
+    proc=$(pgrep -f $*)
+    if [[ $? -eq 0 ]]; then
+        ps -fp ${proc}
+    fi
 }
 
 # Disk usage, sorted in human-readable from high to low
 dusort() {
-    du -sh $* | sort -hr
+    du -sh "$@" | sort -hr
 }
 #}}}
 
 mp3info() {
-    ffprobe ${1} 2>&1 | grep -A90 'Metadata:'
+    ffprobe -hide_banner "${1}" 2>&1 | grep -A90 'Metadata:'
 }
