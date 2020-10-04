@@ -167,9 +167,10 @@ let g:csv_comment = '#'
 " Nvim-R settings {{{
 "---------------------------------------
 let g:R_setwidth = 0
-let g:R_start_libs = 'base,graphics,grDevices,methods,parallel,stats,utils,brainGraph,cairoDevice,data.table,foreach,ggplot2,gridExtra,Hmisc,igraph,MASS,Matrix,mediation,oro.nifti,permute,RcppEigen,RGtk2'
+let g:R_start_libs = 'base,graphics,grDevices,grid,methods,parallel,stats,tools,utils,brainGraph,abind,data.table,foreach,ggplot2,gridExtra,Hmisc,igraph,MASS,Matrix,permute,RcppEigen,car'
 let g:R_in_buffer = 1
-let g:R_tmux_split = 1
+let R_source = '/home/cwatson/.vim/bundle/Nvim-R/R/tmux_split.vim'
+"let g:R_tmux_split = 1
 let g:R_rconsole_width = 0
 let g:R_rconsole_height = 36
 " instruct to use your own .screenrc file
@@ -187,9 +188,9 @@ let g:R_insert_mode_cmds = 0
 let g:rrst_syn_hl_chunk = 1
 
 let R_synctex = 0
-let g:R_openpdf = 1
+let g:R_openpdf = 2 "1
 let g:R_latexcmd = ['pdflatex', '-shell-escape']
-let g:R_pdfviewer = 'zathura'
+let g:R_pdfviewer = 'evince' "'zathura'
 let g:R_texerror = 1
 
 let g:R_objbr_opendf = 1
@@ -338,6 +339,7 @@ if has("autocmd")
   autocmd BufNewFile,BufRead *.cl[os],*.tikz set ft=tex
   autocmd BufNewFile,BufRead *.rsync set ft=rsync
   autocmd BufNewFile,BufRead DESCRIPTION set ft=rdesc
+  autocmd BufNewFile,BufRead 00check.log set ft=rchecklog
   autocmd BufNewFile,BufRead current_message.txt set ft=mail
   autocmd BufNewFile,BufReadPre *pentadactylrc set ft=vim
   autocmd BufNewFile,BufRead *tmux.conf set ft=tmux
@@ -350,8 +352,8 @@ if has("autocmd")
   "}}}
 
   " Text width and tab spacing changes {{{
-  autocmd FileType text,sh,tex,rnoweb,r setlocal textwidth=80
-  autocmd FileType org setlocal textwidth=0
+  autocmd FileType text,sh,tex,r setlocal textwidth=80
+  autocmd FileType org,rnoweb setlocal textwidth=0
 
   " Spacing should be 2 for R- and HTML-related files
   autocmd FileType r,rnoweb,html,scss setlocal ts=2 sw=2 sts=2
