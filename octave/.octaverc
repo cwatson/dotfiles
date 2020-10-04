@@ -1,3 +1,5 @@
 ## Begin savepath auto-created section, do not edit
-  addpath ('/usr/local/matlab/R2012a/toolbox/local/spm12:/usr/local/matlab/R2012a/toolbox/local/BCT/2017_01_15_BCT', '-begin');
+  addpath ('/usr/local/PALM:/usr/lib64/octave/packages/control-2.6.6/x86_64-redhat-linux-gnu-api-v49+:/usr/share/octave/packages/control-2.6.6', '-begin');
 ## End savepath auto-created section
+
+PS1("\\[\\033[01;32m\\]octave:\\#>> \\[\\033[0m\\]")
