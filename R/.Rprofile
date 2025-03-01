@@ -8,7 +8,7 @@
   Sys.setenv(R_PDFVIEWER='/usr/bin/zathura')
 
   library(pacman)
-  p_load(setwidth, data.table, ggplot2, gridExtra, microbenchmark)
+  p_load(setwidth, data.table, grid, gridExtra, lattice, latticeExtra, microbenchmark)
   cat("\nSuccessfully loaded .Rprofile at", date(), "\n")
 }
 
@@ -69,7 +69,7 @@ summBy <- function(x, ...) {
   mdn <- median(x, ...)
   rg <- range(x, ...)
   iqr <- quantile(x, probs=c(0.25, 0.75), ...)
-  return(list(Min.=rg[1], `1st Qu.`=iqr[1], Median=mdn, Mean=mn, `3rd Qu.`=iqr[2], Max.=rg[2]))
+  return(list(N=length(x), Min.=rg[1], `1st Qu.`=iqr[1], Median=mdn, Mean=mn, `3rd Qu.`=iqr[2], Max.=rg[2], `NA's`=sum(is.na(x))))
 }
 
 # Improve "summary" output for matrices and arrays

@@ -43,3 +43,5 @@
     added   = green bold
     changed = yellow bold
     untracked   = red bold
+[credential]
+	helper = cache

@@ -13,7 +13,7 @@ alias ll="ls -l --time-style '+%F %T'"
 alias la="ls -a"
 alias ssh='ssh -Y'
 alias df='df -h'
-alias free='free -m'
+alias free='free -h'
 alias grep='grep --color=always --exclude="*.sw[op]"'
 alias egrep='egrep --color=always --exclude="*.sw[op]"'
 alias less='less -R'
@@ -45,9 +45,11 @@ alias R='R --no-save'
 alias winepdf='wine /home/cwatson/.wine/drive_c/Program\ Files/Tracker\ Software/PDF\ Viewer/PDFXCview.exe'
 alias windjview='wine /home/cwatson/.wine/drive_c/Program\ Files\ \(x86\)/WinDjView/WinDjView.exe'
 alias matlab='matlab -nosplash -nodesktop'
-alias lof='libreoffice6.3 --nologo'
+alias lof='libreoffice7.6 --nologo'
 alias jabref='java -jar /home/cwatson/JabRef-3.8.2.jar'
 alias bnv='/usr/local/BrainNetViewer20181219/run_BrainNet.sh /usr/local/matlab/MATLAB_Runtime_2018a/v94/'
+alias tux='cd /usr/local/tuxguitar/current; ./tuxguitar.sh; cd -'
+alias mpv2='mpv --fs-screen=current -vd-lavc-threads=3'
 
 # Aliases for connecting to the different TACC servers
 alias stampede='tmux rename-session "TACC" && tmux set-option status off && ssh cgwatson@stampede.tacc.utexas.edu -t tmux'

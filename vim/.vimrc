@@ -52,6 +52,7 @@ nnoremap <C-c> :bp\|bd #<CR>
 nnoremap <C-n> :bnext<CR>
 nnoremap <C-p> :bprev<CR>
 nnoremap gO :!zathura <cfile> &<CR>
+nnoremap gx :!xdg-open <cWORD> &<CR><CR>
 nnoremap <Leader><space> :nohlsearch<CR>
 " Press <tab> to match pairs
 nnoremap <tab> %
@@ -103,6 +104,7 @@ Plugin 'chrisbra/Colorizer'
 Plugin 'jcf/vim-latex'
 Plugin 'xuhdev/vim-latex-live-preview'
 Plugin 'jalvesaq/Nvim-R'
+Plugin 'jalvesaq/vimcmdline'
 Plugin 'w0rp/ale'                           "Asynchronous Lint Engine
 " Snippets, utilties, movement
 Plugin 'MarcWeber/vim-addon-mw-utils'
@@ -118,6 +120,9 @@ Plugin 'wellle/tmux-complete.vim'
 Plugin 'godlygeek/tabular'
 Plugin 'mzlogin/vim-markdown-toc'
 Plugin 'plasticboy/vim-markdown'
+Plugin 'vim-pandoc/vim-pandoc'
+Plugin 'vim-pandoc/vim-pandoc-syntax'
+Plugin 'vim-pandoc/vim-rmarkdown'
 "}}}
 
 " Note-taking {{{
@@ -163,6 +168,8 @@ highlight Special ctermfg=brown
 "===============================================================================
 set statusline+=%{fugitive#statusline()}
 let g:csv_comment = '#'
+set rtp+=~/.vim/custom_snippets/
+let g:UltiSnipsSnippetDirectories=["~/.vim/custom_snippets"]
 
 " Nvim-R settings {{{
 "---------------------------------------
@@ -198,6 +205,20 @@ let g:R_objbr_allnames = 0
 let g:R_objbr_place = 'script,right'
 
 let g:rplugin_vimcomport = 1
+"}}}
+" vimcmdline {{{
+let cmdline_app = {}
+let cmdline_app['python'] = 'ipython'
+let cmdline_app['sh'] = 'bash'
+let cmdline_term_height = 40
+
+" Key mappings
+let cmdline_map_start = '<LocalLeader>rf'
+let cmdline_map_source_fun = '<LocalLeader>ff'
+let cmdline_map_send = '<LocalLeader>d'
+let cmdline_map_send_and_stay = '<LocalLeader>l'
+let cmdline_map_send_paragraph = '<LocalLeader>pp'
+let cmdline_map_quit = '<LocalLeader>rq'
 "}}}
 
 " ale/lintr defaults {{{
@@ -352,8 +373,8 @@ if has("autocmd")
   "}}}
 
   " Text width and tab spacing changes {{{
-  autocmd FileType text,sh,tex,r setlocal textwidth=80
-  autocmd FileType org,rnoweb setlocal textwidth=0
+  autocmd FileType text,sh,r setlocal textwidth=80
+  autocmd FileType org,rnoweb,tex setlocal textwidth=0
 
   " Spacing should be 2 for R- and HTML-related files
   autocmd FileType r,rnoweb,html,scss setlocal ts=2 sw=2 sts=2
